@@ -16,10 +16,13 @@ load("data/RentJAPDOWA.RData")
 #******************************************************
 ## Quelques graphiques supplémentaires
 #******************************************************
-
+print("")
+print("###########################################")
 print("############ TP MSF : Script R ############")
+print("###########################################")
+print("")
 print("--------------------------------------------")
-print(" Graphique des rentabilités ")
+print(" 0) Graphique des rentabilités ")
 print("--------------------------------------------")
 #Graphique des rentabilités
 devSVG("images/autres/rentabilites.svg")
@@ -36,6 +39,8 @@ plot(RentM$Dates, RentM$Rt,type="l", main="Rentabilité mensuelle",
      ylab="R", xlab="Dates")
 dev.off()
 
+print("--------> Graphique des rentabilités sauvegardé dans images/autres/")
+print("")
 
 #******************************************************
 ## Question 1 : Distribution empirique des rentabilités
@@ -43,7 +48,7 @@ dev.off()
 
 
 print("--------------------------------------------")
-print(" Répartition des rentabilités ")
+print(" 1) Répartition des rentabilités ")
 print("--------------------------------------------")
 
 #Affichage de l'histogramme, densité, boxplot, droite de henry
@@ -94,6 +99,10 @@ qqline(RentM$Rt, col="red")
 dev.off()
 
 
+
+print("----------> Répartitions des rentabilités sauvegardées dans images/Quest1")
+print("")
+
 #******************************************************
 ## Question 2 : Dépendance linéaire des rentabilités
 #******************************************************
@@ -128,7 +137,7 @@ dev.off()
 
 
 print("--------------------------------------------")
-print(" Espérance des rentabilités journalières")
+print(" 2) Espérance des rentabilités journalières")
 print(" sur les périodes 1990-2002 et 2003-2016")
 print("--------------------------------------------")
 
@@ -145,6 +154,23 @@ print("Espérance période [1990-2002]")
 mean(RentJPeriode1)
 print("Espérance période [2003-2016]")
 mean(RentJPeriode2)
+
+#Variation de l'espérance
+print("Variation relative de l'espérance en pourcentage : ")
+((mean(RentJPeriode2)-mean(RentJPeriode1))/(mean(RentJPeriode1)))*100
+print("                **********   ")
+
+#Calcul de la variance
+print("Variance période [1990-2002]")
+var(RentJPeriode1)
+print("Variance période [2003-2016]")
+var(RentJPeriode2)
+
+#Variation de la variance
+print("Variation relative de la variance en pourcentage : ")
+((var(RentJPeriode2)-var(RentJPeriode1))/(var(RentJPeriode1)))*100
+
+
 
 
 

@@ -8,9 +8,30 @@
 # Script R utilisé pour répondre aux questions du Sujet
 ##########################################################
 
-load("data/RentJAPDOWA.RData")
 library(MASS)
 library(RSvgDevice)
+
+load("data/RentJAPDOWA.RData")
+
+#******************************************************
+## Quelques graphiques supplémentaires
+#******************************************************
+
+#Graphique des rentabilités
+devSVG("images/autres/rentabilites.svg")
+split.screen(c(2,1))
+screen(1)
+plot(RentJ$Dates, RentJ$Rt,type="l", main="Rentabilité journalière",
+     ylab="R", xlab="Dates")
+screen(2)
+split.screen(c(1,2), screen(2))
+plot(RentH$Dates, RentH$Rt,type="l", main="Rentabilité hebdomadaire",
+     ylab="R", xlab="Dates")
+screen(4)
+plot(RentM$Dates, RentM$Rt,type="l", main="Rentabilité mensuelle",
+     ylab="R", xlab="Dates")
+dev.off()
+
 
 #******************************************************
 ## Question 1 : Distribution empirique des rentabilités
@@ -18,7 +39,7 @@ library(RSvgDevice)
 
 #Affichage de l'histogramme, densité, boxplot, droite de henry
 #RentaJ
-devSVG("images/RepartitionJ.svg")
+devSVG("images/Quest1/RepartitionJ.svg")
 split.screen(c(2,1))
 screen(1)
 hist(RentJ$Rt,freq=FALSE, main="RentaJ : Histogramme et densité",
@@ -33,7 +54,7 @@ qqnorm(RentJ$Rt, main = "droite de Henry", xlab="Quantiles théoriques",
 qqline(RentJ$Rt, col="red")
 dev.off()
 #RentaH
-devSVG("images/RepartitionH.svg")
+devSVG("images/Quest1/RepartitionH.svg")
 split.screen(c(2,1))
 screen(1)
 hist(RentH$Rt,freq=FALSE, main="RentaH : Histogramme et densité",
@@ -48,7 +69,7 @@ qqnorm(RentH$Rt, main = "droite de Henry", xlab="Quantiles théoriques",
 qqline(RentH$Rt, col="red")
 dev.off()
 #RentaM
-devSVG("images/RepartitionM.svg")
+devSVG("images/Quest1/RepartitionM.svg")
 split.screen(c(2,1))
 screen(1)
 hist(RentJ$Rt,freq=FALSE, main="RentaM : Histogramme et densité",

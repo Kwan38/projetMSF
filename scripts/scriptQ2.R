@@ -33,7 +33,7 @@ RtM = RentM$Rt
 
 #recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités mensuelles
 print("Recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités mensuelles")
-devSVG("images/Quest2/acf_pacf_RentM")
+devSVG("images/Quest2/acf_pacf_RentM.svg")
 split.screen(c(1,2))
 screen(1)
 acf(RentM$Rt, lag.max = 100)
@@ -44,12 +44,11 @@ print("----------> Graphiques acf et pacf sauvegardées dans images/Quest2")
 print("On observe sur ces graphiques que p + q = 7 + 1 = 8")
 
 #définition du modèle ARMA(7,1)
-armaNIKKEIMensu <- arma(RtM, lag=list(ar=c(1,7), ma=c(1)))
-
-R2NIKKEIMensu <- 1 - var(armaNIKKEIMensu$residuals[!is.na(armaNIKKEIMensu$residuals)])/var(RtM)
+armaRtM <- arma(RentM$Rt, lag=list(ar=c(1,7), ma=c(1)))
+R2RtM <- 1 - var(armaRtM$residuals[!is.na(armaRtM$residuals)])/var(RentM$Rt)
 
 print("R^2 = ")
-R2NIKKEIMensu
+R2RtM
 
 #recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités hebdomadaires
 print("Recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités hebdomadaires")

@@ -19,3 +19,15 @@ load("data/RentJAPDOWA.RData")
 #******************************************************
 
 
+absRentaPrec = abs(RentJ$Rt[-length(RentJ$Rt)])
+absRentaSuiv = abs(RentJ$Rt[-1])
+
+squareRentaPrec = RentJ$Rt[-length(RentJ$Rt)] ^2
+squareRentaSuiv = RentJ$Rt[-1]^2
+
+
+#Légèrement corrélé, mais pas moyen de faire de stratégie car on se sait pas si cela va monter (si on a une renta positive) 
+# ou si les rentas vont descendre (si on a une renta negative) 
+cor(absRentaSuiv,absRentaPrec)
+cor(squareRentaPrec,squareRentaSuiv)
+

@@ -21,8 +21,6 @@ load("data/RentJAPDOWA.RData")
 #on va essayer de regarder les covariances des rentabilités pour étudier leur dépendance en se plaçacant
 #dans le modèle ARMA
 
-
-.libPaths("/user/1/taram/Public/RLib/")
 library(tseries)
 library(RRegArch)
 

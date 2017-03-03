@@ -1,4 +1,4 @@
-####################################
+###################################
 # projetMSF
 #
 # Ibakuyumcu Arnaud
@@ -6,13 +6,15 @@
 # Ruimy Benjamin 
 ####################################
 
-# script.R
+# scriptGlobal.R
 
-Contient tout le script utilisé pour répondre aux questions du TP
+Contient tout le script utilisé pour répondre aux questions du TP. 
+Il fait appel à d'autres scripts afin de structurer le travail. 
+
 
 # Lancer le script  R
 
-source("script.R", print.eval=TRUE)
+source("scriptGlobal.R", print.eval=TRUE)
 
 # images/
 

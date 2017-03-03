@@ -31,7 +31,8 @@ screen(1)
 densityRt <- density(RentJ$Rt)
 normDens <- dnorm(densityRt$x, mean = mean(RentJ$Rt), sd = sd(RentJ$Rt))
 hist(RentJ$Rt,freq=FALSE, main="RentaJ : Histogramme et densité",
-     ylim=c(0,50), col="lightgreen", xlab="Rentabilité", ylab="Densité")
+     ylim=c(0,50), col="lightgreen", xlab="Rentabilité", ylab="Densité",
+     breaks = seq(-0.17,0.17, len = 200))
 lines(densityRt, col="darkgreen", lwd=2)
 lines(densityRt$x,normDens, col="red")
 screen(2)
@@ -49,7 +50,8 @@ screen(1)
 densityRt <- density(RentH$Rt)
 normDens <- dnorm(densityRt$x, mean = mean(RentH$Rt), sd = sd(RentH$Rt))
 hist(RentH$Rt,freq=FALSE, main="RentaH : Histogramme et densité",
-     ylim=c(0,30), col="lightgreen", xlab="Rentabilité", ylab="Densité")
+     ylim=c(0,30), col="lightgreen", xlab="Rentabilité", ylab="Densité",
+     breaks = seq(-0.24,0.3, len = 200))
 lines(densityRt, col="darkgreen", lwd=2)
 lines(densityRt$x, normDens, col="red")
 screen(2)
@@ -64,10 +66,11 @@ dev.off()
 devSVG("images/Quest1/RepartitionM.svg")
 split.screen(c(2,1))
 screen(1)
-densityRt <- density(RentH$Rt)
+densityRt <- density(RentM$Rt)
 normDens <- dnorm(densityRt$x, mean = mean(RentM$Rt), sd = sd(RentM$Rt))
-hist(RentJ$Rt,freq=FALSE, main="RentaM : Histogramme et densité",
-     ylim=c(0,30), col="lightgreen", xlab="Rentabilité", ylab="Densité")
+hist(RentM$Rt,freq=FALSE, main="RentaM : Histogramme et densité",
+     ylim=c(0,30), col="lightgreen", xlab="Rentabilité", ylab="Densité",
+     breaks = seq(-0.3,0.2, len = 200))
 lines(densityRt, col="darkgreen", lwd=2)
 lines(densityRt$x,normDens, col="red")
 screen(2)

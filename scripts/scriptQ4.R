@@ -19,7 +19,6 @@ print(" 4) Espérance des rentabilités journalières")
 print(" sur les périodes 1990-2002 et 2003-2016")
 print("--------------------------------------------")
 
-datesBornes <- Sys.Date()
 datesBornes <- c("1990-01-01", "2002-12-31")
 #Index de la période 1990-2002 : [4201;7405]
 RentJPeriode1 <- RentJ$Rt[RentJ$Dates >= datesBornes[1] 
@@ -40,7 +39,9 @@ print("                **********   ")
 
 
 #test t pour vérifier si les moyennes sont significativement différentes
-#---> Interprétation, regarder si les moyennes sont dans l'interval de confiance + regarder si p-valeur petite (--> on rejette que c'est égal)
+#---> Interprétation, regarder si les moyennes sont dans l'interval de confiance + regarder si p-valeur petite (--> on aimerait rejetter que c'est égal 
+# p-val un tout petit peu trop grande et on se trouve vraiment au bord de l'intervalle de confiance)
+# Cas critique
 t.test(RentJPeriode1,RentJPeriode2)
 
 

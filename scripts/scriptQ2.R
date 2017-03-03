@@ -24,7 +24,7 @@ load("data/RentJAPDOWA.RData")
 library(tseries)
 library(RRegArch)
 library(TSA)
-
+############### Partie hebdomadaire #####################
 #recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités hebdomadaires
 print("Recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités hebdomadaires")
 devSVG("images/Quest2/acf_pacf_RentH.svg")
@@ -39,27 +39,53 @@ print("On observe sur ces graphiques que p + q = 8 + 1 = 9")
 print("")
 print("La librairie TSA nous donne les combinaisons (p,q) signifiantes : ")
 eacfMat <-TSA::eacf(RentH$Rt, ar.max = 8, ma.max = 5)
-eacfMat
 
 #choix du modèle AR/MA (celui ayant le plus petit critère d'AIC)
-AICMat <- matrix(0,nrow = 8,ncol = 5)
-for (i in 1:8) {
-  for (j in 1:5) {
-    if (i != 0 || j != 0){
+AICMat <- matrix(0,nrow = 3,ncol = 3)
+# Il y a des problèmes d'optimisations (pour le fit) dès que p>3 et q>3 
+for (i in 1:3) {
+  for (j in 1:3) {
+    if(i != 1 || j != 1){
       if (eacfMat$symbol[i,j]=="x") {
         armaRtHSum <- summary(arma(RentH$Rt, order = c(i-1,j-1)))
         AICMat[i,j] = armaRtHSum$aic
       }else{
-        AICMat[i,j] = "x"
+        AICMat[i,j] = "_"
       }
     }
   }
 }
+AICMat
+print("On remarque que le modèle au AIC minimum est ARMA(2,1)")
+armaRtH <- arma(RentH$Rt, order = c(2,1))
+summary(armaRtH)
+print("")
+#Calcul du R2
 R2RtH <- 1 - var(armaRtH$residuals[!is.na(armaRtH$residuals)])/var(RentH$Rt)
-
 print("R^2 = ")
 R2RtH
 
+#Étude des résidus
+devSVG("images/Quest2/histResH.svg")
+hist(armaRtH$residuals, breaks = seq(-0.24,0.18, len = 200), probability = T, 
+     main = "Histogram of residuals", xlab = "Residuals", col= 'grey')
+moy <- mean(armaRtH$residuals[!is.na(armaRtH$residuals)])
+std <- sd(armaRtH$residuals[!is.na(armaRtH$residuals)])
+plot(function(x) dnorm(x,moy,std), xlim = c(-0.2,0.2), add = TRUE,
+     col = 'red', lwd = 1.5)
+dev.off()
+#Diagramme moustache et diagramme quantile quantile
+devSVG("images/Quest2/moreRshH.svg")
+split.screen(c(1,2))
+screen(1)
+fBasics::qqnormPlot(armaRtH$residuals[!is.na(armaRtH$residuals)], main = "Diagramme quantile-quantile",
+                    col = 'darkgreen')
+screen(2)
+boxplot(armaRtH$residuals, col = 'lightgreen', border = 'darkgreen', 
+        main = "Diagramme moustache des résidus")
+dev.off()
+
+######################## Partie Journaliere ##############################
 #recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités journalières
 print("Recherche des valeurs de p et q du modele ARMA(p,q) pour les rentabilités journalières")
 devSVG("images/Quest2/acf_pacf_RentJ.svg")

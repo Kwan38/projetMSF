@@ -6,8 +6,9 @@
 # 			  l'interface de de RStudios
 #####################################################################
 
-library("moments")
 install.packages("moments")
+library("moments")
+
 
 install.packages("stabledist");
 #library("fBasics")
@@ -15,7 +16,7 @@ install.packages("fBasics")
 install.packages("TSA")
 install.packages("aod")
 
-load("RentHNGKNGI.RData")
+load("data/RentJAPDOWA.RData")
 .libPaths("/user/1/taram/Public/RLib/");
 
 library("tseries");

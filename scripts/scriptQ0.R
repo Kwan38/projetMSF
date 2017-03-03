@@ -26,16 +26,15 @@ print("--------------------------------------------")
 print(" 0) Graphique des rentabilités ")
 print("--------------------------------------------")
 #Graphique des rentabilités
-devSVG("images/autres/rentabilites.svg")
-split.screen(c(2,1))
-screen(1)
+devSVG("images/autres/rentabilitesJ.svg")
 plot(RentJ$Dates, RentJ$Rt,type="l", main="Rentabilité journalière",
      ylab="R", xlab="Dates")
-screen(2)
-split.screen(c(1,2), screen(2))
+dev.off()
+devSVG("images/autres/rentabilitesH.svg")
 plot(RentH$Dates, RentH$Rt,type="l", main="Rentabilité hebdomadaire",
      ylab="R", xlab="Dates")
-screen(4)
+dev.off()
+devSVG("images/autres/rentabilitesM.svg")
 plot(RentM$Dates, RentM$Rt,type="l", main="Rentabilité mensuelle",
      ylab="R", xlab="Dates")
 dev.off()
